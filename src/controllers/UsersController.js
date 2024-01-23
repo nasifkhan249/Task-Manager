@@ -1,5 +1,5 @@
-const {registration, login, profileUpdate, ProfileDetails, RecoveryVerifyEmail, RecoveryVerifyOtp,
-    RecoveryVerifyPassword
+const {registration, login, profileUpdate, ProfileDetails, RecoveryVerifyEmail, RecoveryVerifyOTP,
+    RecoveryVerifyResetPass
 } = require("../services/users/userServices");
 exports.signUp=async (req,res)=>{
     let result=await registration(req);
@@ -27,11 +27,11 @@ exports.VerifyEmail=async (req,res)=>{
 }
 
 exports.VerifyOTP=async (req,res)=>{
-    let result=await RecoveryVerifyOtp(req);
+    let result=await RecoveryVerifyOTP(req);
     res.status(200).json(result);
 }
 
 exports.VerifyResetPass=async (req,res)=>{
-    let result=await RecoveryVerifyPassword(req);
+    let result=await RecoveryVerifyResetPass(req);
     res.status(200).json(result);
 }

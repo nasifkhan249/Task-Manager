@@ -1,9 +1,9 @@
 {
   "name": "task-manager",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js"
   },
@@ -24,5 +24,6 @@
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.3",
     "xss-clean": "^0.1.4"
-  }
+  },
+  "description": ""
 }

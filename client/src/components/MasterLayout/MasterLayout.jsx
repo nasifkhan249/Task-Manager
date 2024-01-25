@@ -8,25 +8,26 @@ import { RiDashboardLine } from 'react-icons/ri';
 import {MdOutlineCancelPresentation} from "react-icons/md"
 
 
-const MasterLayout = () => {
+const MasterLayout = (props) => {
     let contentRef,sideNavRef=useRef();
 
 
 
     const MenuBarClickHandler = () => {
-        let sideNav = sideNavRef;
-        let content = contentRef;
-        if (sideNav.classList.contains("side-nav-open")) {
+      let sideNav=sideNavRef;
+      let content=contentRef;
+
+      if(sideNav.classList.contains("side-nav-open")){
             sideNav.classList.add("side-nav-close");
             sideNav.classList.remove("side-nav-open");
             content.classList.add("content-expand");
-            content.classList.remove("content");
-        } else {
-            sideNav.classList.remove("side-nav-close");
-            sideNav.classList.add("side-nav-open");
-            content.classList.remove("content-expand");
-            content.classList.add("content");
-        }
+            content.classList.remove("content")
+      }else{
+          sideNav.classList.remove("side-nav-close");
+          sideNav.classList.add("side-nav-open");
+          content.classList.remove("content-expand");
+          content.classList.add("content")
+      }
     };
 
 
@@ -42,10 +43,10 @@ const MasterLayout = () => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src="photo" alt=""/>
+                            <img className="icon-nav-img icon-nav" src="409719858_2079837312370230_802255953641365866_n.jpg" alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src="photo" alt=""/>
+                                    <img className="icon-nav-img" src="409719858_2079837312370230_802255953641365866_n.jpg" alt=""/>
                                     <h6>firstName</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
@@ -98,7 +99,7 @@ const MasterLayout = () => {
             </div>
 
             <div ref={(div) => contentRef = div} className="content">
-                {/* {props.children} */}
+                 {props.children}
             </div>
 
         </Fragment>

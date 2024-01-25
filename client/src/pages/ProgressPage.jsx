@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import MasterLayout from "../components/MasterLayout/MasterLayout";
+import Progress from "../components/Progress/Progress";
+
+
 
 const ProgressPage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <MasterLayout>
+
+                    <Progress/>
+
+            </MasterLayout>
+        </Fragment>
     );
 };
 
 export default ProgressPage;
+
+

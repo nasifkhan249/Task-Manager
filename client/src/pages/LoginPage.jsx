@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {Fragment, lazy, Suspense} from 'react';
+import Login from "../components/Login/Login";
+
 
 const LoginPage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <Suspense>
+                <Login/>
+            </Suspense>
+        </Fragment>
     );
 };
 
 export default LoginPage;
+
+
+
+

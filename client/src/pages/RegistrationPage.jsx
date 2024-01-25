@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {Fragment, lazy} from 'react';
+import Registration from "../components/Registration/Registration";
+
 
 const RegistrationPage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+
+                <Registration/>
+
+        </Fragment>
     );
 };
 
 export default RegistrationPage;
+
+

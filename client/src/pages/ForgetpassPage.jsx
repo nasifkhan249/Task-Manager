@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {Fragment, Suspense} from 'react';
+import SendOTP from "../components/AcountRecovery/Send-OTP";
+
 
 const ForgetpassPage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <Suspense>
+                <SendOTP/>
+            </Suspense>
+        </Fragment>
     );
 };
 
 export default ForgetpassPage;
+
+
+
+

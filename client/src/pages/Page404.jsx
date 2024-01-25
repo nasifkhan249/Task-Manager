@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {Fragment, Suspense} from 'react';
+import NotFound from "../components/NotFound/NotFound";
 
 const Page404 = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <Suspense>
+                <NotFound/>
+            </Suspense>
+        </Fragment>
     );
 };
 
 export default Page404;
+
+
+

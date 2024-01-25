@@ -1,11 +1,23 @@
-import React from 'react';
+import React, {Fragment, Suspense} from 'react';
+import MasterLayout from "../components/MasterLayout/MasterLayout";
+import Create from "../components/Create/Create";
+
+
+
 
 const CreatePage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <MasterLayout>
+                <Suspense>
+                    <Create/>
+                </Suspense>
+            </MasterLayout>
+        </Fragment>
     );
 };
 
 export default CreatePage;
+
+
+

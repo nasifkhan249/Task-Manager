@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {Fragment, Suspense} from 'react';
+import MasterLayout from "../components/MasterLayout/MasterLayout";
+import Completed from "../components/Completed/Completed";
+
 
 const CompletedPage = () => {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <MasterLayout>
+                <Suspense>
+                    <Completed/>
+                </Suspense>
+            </MasterLayout>
+        </Fragment>
     );
 };
 

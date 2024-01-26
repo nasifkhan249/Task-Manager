@@ -1,11 +1,12 @@
-import React, {Fragment, Suspense} from 'react';
-import SendOTP from "../components/AcountRecovery/Send-OTP";
+import React, {Fragment, lazy, Suspense} from 'react';
+import LazyLoader from "../components/MasterLayout/LazyLoader";
+const SendOTP=lazy(()=>import("../components/AcountRecovery/Send-OTP"))
 
 
 const ForgetpassPage = () => {
     return (
         <Fragment>
-            <Suspense>
+            <Suspense fallback={<LazyLoader/>}>
                 <SendOTP/>
             </Suspense>
         </Fragment>

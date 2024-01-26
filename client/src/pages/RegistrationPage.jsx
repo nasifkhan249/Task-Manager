@@ -1,12 +1,14 @@
-import React, {Fragment, lazy} from 'react';
-import Registration from "../components/Registration/Registration";
+import React, {Fragment, lazy, Suspense} from 'react';
+const Registration=lazy(()=>import("../components/Registration/Registration"))
 
 
 const RegistrationPage = () => {
     return (
         <Fragment>
 
-                <Registration/>
+                <Suspense>
+                    <Registration/>
+                </Suspense>
 
         </Fragment>
     );

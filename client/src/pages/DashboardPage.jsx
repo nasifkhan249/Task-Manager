@@ -1,13 +1,14 @@
-import React, {Fragment,Suspense} from 'react';
+import React, {Fragment, lazy, Suspense} from 'react';
 import MasterLayout from "../components/MasterLayout/MasterLayout";
-import Dashboard from "../components/Dashboard/Dashboard";
+import LazyLoader from "../components/MasterLayout/LazyLoader";
+const Dashboard=lazy(()=>import("../components/Dashboard/Dashboard"))
 
 
 const DashboardPage = () => {
     return (
         <Fragment>
             <MasterLayout>
-                <Suspense>
+                <Suspense fallback={<LazyLoader/>}>
                     <Dashboard/>
                 </Suspense>
             </MasterLayout>

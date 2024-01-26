@@ -14,7 +14,7 @@ const VerifyOTP = () => {
                             <div className="card-body">
                                 <h4>OTP VERIFICATION </h4>
                                 <p>A 6 Digit verification code has been sent to your email address. </p>
-                                <ReactCodeInput inputStyle={defaultInputStyle}  fields={6} />
+                                <ReactCodeInput fields={6} />
                                 <br/>  <br/>
                                 <button className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
                             </div>

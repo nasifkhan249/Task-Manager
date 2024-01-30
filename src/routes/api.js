@@ -9,6 +9,7 @@ const router =express.Router();
 
 router.post("/signup",UsersController.signUp);
 router.post("/signin",UsersController.signIn);
+router.get('/logout',AuthVerifyMiddleware,UsersController.UserLogout)
 router.post("/update",AuthVerifyMiddleware,UsersController.UpdateProfile);
 router.get("/details",AuthVerifyMiddleware,UsersController.DetailsProfile);
 router.get("/verifyemail/:email",UsersController.VerifyEmail);

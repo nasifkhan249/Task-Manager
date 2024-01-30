@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&amp;display=swap');
+@import "sidebar.css";
+@import "progress.css";
+@import "dropdownmenu.css";
 
 .d-none{
   display: none;
@@ -40,6 +43,3 @@ a:hover {
   box-shadow: none !important;
 }
 
-@import "sidebar.css";
-@import "progress.css";
-@import "dropdownmenu.css";

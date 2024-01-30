@@ -43,26 +43,42 @@ exports.UpdatedTask=async (req)=>{
     }
 }
 
-exports.ListTaskByStatus=async (req)=>{
-    try {
-        let email=req.headers.email;
-        let status=req.params.status;
-        let data=await TasksModel.aggregate([{$match:{email:email,status:status}},{$project:{_id:1,title:1,description:1,status:1,createDate:{
-            $dateToString:{
-                date:"$createdDate",
-                format:"%d-%m-%Y"
-            }
-                }}}])
-       if(data.length>0){
-           return {status:"success",data:data}
-       }else{
-           return {status:"fail",data:"Data Not Found"}
-       }
 
-    }catch (e) {
-        return {status:"fail",data:e}
+
+exports.ListTaskByStatus = async (req) => {
+    try {
+        let email = req.headers['email'];
+        let status = req.params.status;
+        let data = await TasksModel.aggregate([
+            {
+                $match: { email: email, status: status }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    description: 1,
+                    status: 1,
+                    createDate: {
+                        $dateToString: {
+                            date: "$createdDate",
+                            format: "%d-%m-%Y"
+                        }
+                    }
+                }
+            }
+        ]);
+
+        if (data.length > 0) {
+            return { status: "success", data: data };
+        } else {
+            return { status: "fail", data: "Data Not Found" };
+        }
+
+    } catch (e) {
+        return { status: "fail", data: e };
     }
-}
+};
 
 
 exports.TaskStatusCount=async (req)=>{

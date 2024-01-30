@@ -1,11 +1,16 @@
-import React, {Fragment} from 'react';
+import  {Fragment} from 'react';
 import {Container} from "react-bootstrap";
 import {AiOutlineCalendar} from "react-icons/ai";
 import {AiOutlineEdit} from "react-icons/ai";
 import {AiOutlineDelete} from "react-icons/ai";
 
 
+
+
 const Completed = () => {
+  
+
+
     return (
         <Fragment>
             <Container fluid={true} className="content-body">
@@ -26,7 +31,7 @@ const Completed = () => {
                 </div>
                 <div className="row p-0 m-0">
 
-                            <div className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
+                    <div className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
                                 <div className="card h-100">
                                     <div className="card-body">
                                         <h6 className="animated fadeInUp">title</h6>
@@ -40,6 +45,10 @@ const Completed = () => {
                                     </div>
                                 </div>
                             </div>
+                            
+                    
+
+                            
 
                 </div>
             </Container>

@@ -1,22 +1,21 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState} from 'react';
 import {Container} from "react-bootstrap";
 import {AiOutlineEdit,AiOutlineCalendar,AiOutlineDelete} from "react-icons/ai";
-import {TaskListByStatus} from "../../APIRequest/APIRequest"
-import { useSelector } from 'react-redux';
+import { ListByStatus } from '../../APIRequest/APIRequest';
+
+
+
 
 
 
 const New = () => {
-
+    const [data_new,setData_new]=useState([]);
     useEffect(()=>{
-       
-      TaskListByStatus("New");
-       
-    },[]);
-
-    const NewList=useSelector((state)=>state.task.New);
-  
-
+        (async()=>{
+            let newTask=await ListByStatus("New");
+            setData_new(newTask);
+        })()
+    },[0])
     return (
         <Fragment>
             <Container fluid={true} className="content-body">
@@ -36,29 +35,29 @@ const New = () => {
                     </div>
                 </div>
                 <div className="row p-0 m-0">          
-                           {
-                            NewList.map((item,i)=>{
-                                return(
-                                    <div key={i.toString()} className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
-                                    <div className="card h-100">
-                                        <div className="card-body">
-                                            <h6 className="animated fadeInUp">{item.title}</h6>
-                                            <p className="animated fadeInUp">
-                                                {item.description}</p>
-                                            <p className="m-0 animated fadeInUp p-0">
-                                                <AiOutlineCalendar/> {item.createDate	}
-                                                <a className="icon-nav text-primary mx-1"><AiOutlineEdit/></a>
-                                                <a className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
-                                                <a className="badge float-end bg-info">
-                                                    {item.status}
-                                                </a>
-                                            </p>
-                                        </div>
+                {
+                    data_new.map((item,i)=>{
+                        return(
+                            <div key={i} className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
+                                <div className="card h-100">
+                                    <div className="card-body">
+                                        <h6 className="animated fadeInUp">{item.title}</h6>
+                                        <p className="animated fadeInUp">
+                                            {item.description}</p>
+                                        <p className="m-0 animated fadeInUp p-0">
+                                            <AiOutlineCalendar/> {item.createDate}	
+                                            <a className="icon-nav text-primary mx-1"><AiOutlineEdit/></a>
+                                            <a className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
+                                            <a className="badge float-end bg-info">
+                                                {item.status}
+                                            </a>
+                                        </p>
                                     </div>
                                 </div>
-                                )
-                            })
-                           }
+                            </div>
+                        )
+                    }) 
+                }
                 </div>
             </Container>
         </Fragment>

@@ -4,8 +4,7 @@ import store from '../redux/store/store';
 import { HideLoader, ShowLoader } from '../redux/state-slice/settings-slice';
 import getTokenFromCookie from "../helpers/unauthorized.js";
 import { setToken, setUserDetails} from "../helpers/SessionHelper.js";
-import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state-slice/task-slice";
-import { SetSummary } from '../redux/state-slice/summary-slice.js';
+import { setCanceledTask, setCompletedTask, setProgressTask } from '../redux/state-slice/task-slice.js';
 let userAuth={headers:{"token":getTokenFromCookie()}}
 
 const BaseURL="";
@@ -57,7 +56,7 @@ export async function LoginRequest(email,password){
                 ErrorToast("Invalid Email or Password")
                 return  false;
             }
-        } catch (error) {
+        } catch (e) {
             ErrorToast("Something Went Wrong");
             store.dispatch(HideLoader())
             return false;
@@ -111,8 +110,6 @@ export async function RegisterRequest(email, firstName, lastName, mobile, passwo
 
 
 
-
-
 export async function TaskListByStatus(status){
     store.dispatch(ShowLoader());
         try {
@@ -120,18 +117,15 @@ export async function TaskListByStatus(status){
             let result=await axios.get(URL,userAuth);
             store.dispatch(HideLoader());
            if(result.status===200){
-            if(status==="New"){
-                store.dispatch(SetNewTask(result.data['data']));
-            }
-            else if(status==="Completed"){
-                store.dispatch(SetCompletedTask(result.data['data']))
+             if(status==="Completed"){
+                store.dispatch(setCompletedTask(result.data['data']))
             }
             else if(status==="Canceled"){
-                store.dispatch(SetCanceledTask(result.data['data']))
+                store.dispatch(setCanceledTask(result.data['data']))
             }
             else if(status==="Progress"){
                 
-                store.dispatch(SetProgressTask(result.data['data']))
+                store.dispatch(setProgressTask(result.data['data']))
             }
            }else{
                 ErrorToast("Something Went Wrong");
@@ -143,23 +137,24 @@ export async function TaskListByStatus(status){
             
         }
 }
-
-export async function SummaryRequest(){
+export async function ListByStatus(status){
     store.dispatch(ShowLoader());
-        try {
-            let URL=BaseURL+"/api/v1/taskcount";
+    try {
+            let URL=BaseURL+"/api/v1/listtaskbystatus/"+status;
             let result=await axios.get(URL,userAuth);
             store.dispatch(HideLoader());
-            if(result.status===200){
-                store.dispatch(SetSummary(result.data['data']))
-            }else{
-                ErrorToast("Something Went Wrong")
-            }
-        }catch (e) {
-            ErrorToast("Something Went Wrong")
-            store.dispatch(HideLoader())
-        }
+            let data=result.data['data'];
+            return data
+    } catch (e) {
+        ErrorToast("Something Went Wrong");
+    }
 }
+
+
+
+
+
+
 
 
 

@@ -15,13 +15,9 @@ exports.DeleteTask=async(req)=>{
         const id = req.params.id;
         const query = { _id: id, email: req.headers.email };
         const data = await TasksModel.deleteOne(query);
-        if (data.deletedCount === 0) {
-            return {status:"fail",data:"No found"}
-        } else {
             return {status:"success",data:data}
-        }
     } catch (e) {
-        return {status:"success",data:e}
+        return {status:"fail",data:e}
     }
 }
 
@@ -31,12 +27,9 @@ exports.UpdatedTask=async (req)=>{
         let status=req.params.status;
         let email=req.headers.email
         let data=await TasksModel.updateOne({_id:id,email:email},{$set:{status:status}},{upsert:true});
-        if(data){
+
 
             return {status:"success",data:data}
-        }else {
-            return {status:"fail",data:"No found"}
-        }
 
     }catch (e) {
         return {status:"success",data:e}
@@ -69,11 +62,8 @@ exports.ListTaskByStatus = async (req) => {
             }
         ]);
 
-        if (data.length > 0) {
+
             return { status: "success", data: data };
-        } else {
-            return { status: "fail", data: "Data Not Found" };
-        }
 
     } catch (e) {
         return { status: "fail", data: e };
@@ -85,12 +75,8 @@ exports.TaskStatusCount=async (req)=>{
     try {
         let email=req.headers.email;
         let data=await TasksModel.aggregate([{$match:{email:email}},{$group:{_id:"$status",sum:{$count:{}}}}]);
-        if(data.length>0){
-            return {status:"success",data:data}
-        }else{
-            return {status:"fail",data:"Data Not Found"}
-        }
 
+            return {status:"success",data:data}
     }catch (e) {
         return {status:"fail",data:e}
     }

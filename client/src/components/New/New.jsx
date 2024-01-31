@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState} from 'react';
 import {Container} from "react-bootstrap";
 import {AiOutlineEdit,AiOutlineCalendar,AiOutlineDelete} from "react-icons/ai";
 import { ListByStatus } from '../../APIRequest/APIRequest';
+import { DeleteTODO } from '../../helpers/DeleteAlert';
 
 
 
@@ -10,12 +11,21 @@ import { ListByStatus } from '../../APIRequest/APIRequest';
 
 const New = () => {
     const [data_new,setData_new]=useState([]);
+ 
     useEffect(()=>{
         (async()=>{
             let newTask=await ListByStatus("New");
             setData_new(newTask);
         })()
-    },[0])
+    },[0]);
+    const DeleteItem =async (id) => {
+       await DeleteTODO(id).then((result) => {
+            if (result === true) {
+                const newData = data_new.filter(item => item._id !== id);
+                setData_new(newData);
+            }
+        });
+    };
     return (
         <Fragment>
             <Container fluid={true} className="content-body">
@@ -47,7 +57,7 @@ const New = () => {
                                         <p className="m-0 animated fadeInUp p-0">
                                             <AiOutlineCalendar/> {item.createDate}	
                                             <a className="icon-nav text-primary mx-1"><AiOutlineEdit/></a>
-                                            <a className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
+                                            <a onClick={()=>DeleteItem(item._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
                                             <a className="badge float-end bg-info">
                                                 {item.status}
                                             </a>

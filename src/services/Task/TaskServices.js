@@ -15,7 +15,7 @@ exports.DeleteTask=async(req)=>{
         const id = req.params.id;
         const query = { _id: id, email: req.headers.email };
         const data = await TasksModel.deleteOne(query);
-            return {status:"success",data:data}
+        return {status:"success",data:data}
     } catch (e) {
         return {status:"fail",data:e}
     }

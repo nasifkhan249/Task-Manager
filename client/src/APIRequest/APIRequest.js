@@ -5,6 +5,7 @@ import { HideLoader, ShowLoader } from '../redux/state-slice/settings-slice';
 import getTokenFromCookie from "../helpers/unauthorized.js";
 import { setToken, setUserDetails} from "../helpers/SessionHelper.js";
 import { setCanceledTask, setCompletedTask, setProgressTask } from '../redux/state-slice/task-slice.js';
+import { setSummary } from '../redux/state-slice/summary-slice.js';
 let userAuth={headers:{"token":getTokenFromCookie()}}
 
 const BaseURL="";
@@ -147,6 +148,44 @@ export async function ListByStatus(status){
             return data
     } catch (e) {
         ErrorToast("Something Went Wrong");
+    }
+}
+
+export async function TaskCountByStatus(){
+    store.dispatch(ShowLoader());
+    try {
+        let URL=BaseURL+"/api/v1/taskcount";
+        let result=await axios.get(URL,userAuth);
+        store.dispatch(HideLoader());
+        if(result.status===200){
+            store.dispatch(setSummary(result.data['data']))
+        }else{
+            ErrorToast("Something went wrong");
+        }
+    } catch (e) {
+        ErrorToast("Something went wrong");
+    }finally{
+        store.dispatch(HideLoader());
+    }
+}
+
+export async function DeleteTask(id){
+    store.dispatch(ShowLoader());
+    try {
+        let URL=BaseURL+"/api/v1/deletetask/"+id;
+        let result=await axios.post(URL,userAuth);
+        store.dispatch(HideLoader());
+        if(result.status===200){
+            SuccessToast("Task delete Successful");
+            return true;
+        }else{
+            ErrorToast("Something went wrong");
+            return false;
+        }
+    } catch (e) {
+        ErrorToast("Something went wrong");
+    }finally{
+        store.dispatch(HideLoader());
     }
 }
 

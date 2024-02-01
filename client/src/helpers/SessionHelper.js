@@ -1,12 +1,12 @@
-import {signedCookie} from "cookie-parser";
+
 
 class SessionHelper{
     setToken(token){
         localStorage.setItem("token",token);
-    };
+    }
     getToken(){
         return localStorage.getItem("token");
-    };
+    }
 
 
 

@@ -6,6 +6,7 @@ import getTokenFromCookie from "../helpers/unauthorized.js";
 import { setToken, setUserDetails} from "../helpers/SessionHelper.js";
 import { setCanceledTask, setCompletedTask, setProgressTask } from '../redux/state-slice/task-slice.js';
 import { setSummary } from '../redux/state-slice/summary-slice.js';
+import { setProfile } from '../redux/state-slice/profile-slice.js';
 let userAuth={headers:{"token":getTokenFromCookie()}}
 
 const BaseURL="";
@@ -97,12 +98,13 @@ export async function RegisterRequest(email, firstName, lastName, mobile, passwo
                         return true;
                     }
                 } else {
-                    ErrorToast("Something went wrong");
+                    ErrorToast("Something went wrong1");
                     return false
                 }
     }catch (e) {
         store.dispatch(HideLoader())
-        ErrorToast("Something went wrong");
+        ErrorToast("Something went wrong2");
+        console.log(e);
         return false;
     }
 }
@@ -225,6 +227,51 @@ export async function LogoutRequest(){
    }finally {
        store.dispatch(HideLoader());
    }
+}
+
+
+export async function ProfileDetailsRequest(){
+        store.dispatch(ShowLoader());
+        try {
+            let URL=BaseURL+"/api/v1/details";
+            let result=await axios.get(URL,userAuth);
+            store.dispatch(HideLoader());
+            if(result.status===200){
+                store.dispatch(setProfile(result.data['data'][0]));
+            }else{
+                ErrorToast("Something went wrong1") 
+            }
+        } catch (e) {
+            ErrorToast("Something went wrong2");
+        }finally{
+            store.dispatch(HideLoader());
+        }
+}
+
+
+export async function ProfileUpdateRequest(email,firstName,lastName,mobile,password,photo){
+    store.dispatch(ShowLoader());
+    try {
+        let URL=BaseURL+"/api/v1/update";
+        let PostBody={email:email,firstName:firstName,lastName:lastName,mobile:mobile,password:password,photo:photo}
+        let UserDetails={email:email,firstName:firstName,lastName:lastName,mobile:mobile,photo:photo}
+
+        let result=await axios.post(URL,PostBody,userAuth);
+        if(result.status===200){
+            SuccessToast("Profile Update");
+            setUserDetails(UserDetails);
+            return true;
+        }else{
+            ErrorToast("Something went wrong1");
+            return false;
+        }
+    } catch (e) {
+        ErrorToast("Something went wrong2");
+        return false;
+    }finally{
+        store.dispatch(HideLoader());
+    }
+
 }
 
 

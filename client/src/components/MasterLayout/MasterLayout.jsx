@@ -1,4 +1,4 @@
-import React, {Fragment, useRef} from "react";
+import {Fragment, useRef} from "react";
 import {Container,Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
@@ -7,6 +7,7 @@ import logo from "../../assets/images/logo.svg";
 import { RiDashboardLine } from 'react-icons/ri';
 import {MdOutlineCancelPresentation} from "react-icons/md"
 import {LogoutRequest} from "../../APIRequest/APIRequest.js";
+import { getUserDetails } from "../../helpers/SessionHelper.js";
 
 
 const MasterLayout = (props) => {
@@ -50,11 +51,11 @@ const MasterLayout = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src="409719858_2079837312370230_802255953641365866_n.jpg" alt=""/>
+                            <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src="409719858_2079837312370230_802255953641365866_n.jpg" alt=""/>
-                                    <h6>firstName</h6>
+                                    <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
+                                    <h6>{getUserDetails()['firstName']}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
                                 <NavLink to="/Profile" className="side-bar-item">

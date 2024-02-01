@@ -2,7 +2,6 @@ const UsersModel=require("../../models/UsersModel");
 const OTPModel=require("../../models/OTPModel");
 const CreateToken=require("../../utility/CreateToken");
 const SendEmailUtility=require("../../utility/SendEmailUtility");
-const {upgrade} = require("nodemailer/.ncurc");
 exports.registration=async (req)=>{
    try {
        let reqBody=req.body;

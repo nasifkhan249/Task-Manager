@@ -30,7 +30,9 @@ const Progress = () => {
 
     const UpdateItem=async (id,status)=>{
         await UpdateTODO(id,status).then((result)=>{
-            setRefresh(prevItem=>prevItem+1);
+            if(result===true){
+                setRefresh(prevItem=>prevItem+1);
+            }
         })
     }
     

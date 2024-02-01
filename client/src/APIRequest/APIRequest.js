@@ -190,6 +190,44 @@ export async function DeleteTask(id){
 }
 
 
+export async function DeleteRequest(id,status){
+    store.dispatch(ShowLoader());
+    try {
+        let URL=BaseURL+"/api/v1/updatetask/"+id+"/"+status;
+        let result=await axios.post(URL,userAuth);
+        store.dispatch(HideLoader());
+        if(result.status===200){
+            SuccessToast("Task update successful");
+            return true;
+        }else{
+            ErrorToast("Something went wrong");
+            return false;
+        }
+    }catch (e) {
+        ErrorToast("Something went wrong");
+    }finally {
+        store.dispatch(HideLoader());
+    }
+
+}
+
+export async function LogoutRequest(){
+    store.dispatch(ShowLoader());
+   try {
+       let URL=BaseURL+"/api/v1/logout";
+       let result=await axios.get(URL,userAuth);
+       store.dispatch(HideLoader());
+       if(result.data['status']==="success"){
+           return true;
+       }
+   }catch (e) {
+      ErrorToast("Something went wrong");
+   }finally {
+       store.dispatch(HideLoader());
+   }
+}
+
+
 
 
 

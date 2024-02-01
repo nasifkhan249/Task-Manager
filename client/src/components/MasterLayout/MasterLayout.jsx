@@ -6,6 +6,7 @@ import {BsHourglass, BsListNested} from "react-icons/bs";
 import logo from "../../assets/images/logo.svg";
 import { RiDashboardLine } from 'react-icons/ri';
 import {MdOutlineCancelPresentation} from "react-icons/md"
+import {LogoutRequest} from "../../APIRequest/APIRequest.js";
 
 
 const MasterLayout = (props) => {
@@ -29,6 +30,12 @@ const MasterLayout = (props) => {
           content.classList.add("content")
       }
     };
+
+    const handleLogout=async ()=>{
+       await LogoutRequest();
+       localStorage.clear();
+       window.location.href="/Login"
+    }
 
 
 
@@ -54,8 +61,7 @@ const MasterLayout = (props) => {
                                     <AiOutlineUser className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>
-                                <a  className="side-bar-item">
-                                    <AiOutlineLogout className="side-bar-item-icon" />
+                                <a onClick={handleLogout} className="side-bar-item"><AiOutlineLogout className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Logout</span>
                                 </a>
                             </div>

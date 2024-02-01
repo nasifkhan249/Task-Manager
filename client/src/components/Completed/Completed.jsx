@@ -1,4 +1,4 @@
-import  {Fragment, useEffect} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {Container} from "react-bootstrap";
 import {AiOutlineCalendar} from "react-icons/ai";
 import {AiOutlineEdit} from "react-icons/ai";
@@ -6,17 +6,19 @@ import {AiOutlineDelete} from "react-icons/ai";
 import { TaskListByStatus } from '../../APIRequest/APIRequest';
 import { useSelector } from 'react-redux';
 import { DeleteTODO } from '../../helpers/DeleteAlert';
+import {UpdateTODO} from "../../helpers/UpdateAlert.js";
 
 
 
 
 
 const Completed = () => {
+    const [refresh,setRefresh]=useState(0)
     useEffect(()=>{
         (async()=>{
             await TaskListByStatus("Completed");
         })()
-    },[0]);
+    },[refresh])
 
     const CompletedList=useSelector((state)=>state.task.Completed);
 
@@ -24,6 +26,14 @@ const Completed = () => {
        await DeleteTODO(id).then((result)=>{
             if(result===true){
                 TaskListByStatus("Completed")
+            }
+        })
+    }
+
+    const UpdateItem=async (id,status)=>{
+        await UpdateTODO(id,status).then((result)=>{
+            if(result===true){
+                setRefresh(prevKey=>prevKey+1);
             }
         })
     }
@@ -57,7 +67,7 @@ const Completed = () => {
                                                 <p className="animated fadeInUp">{item.description}</p>
                                                 <p className="m-0 animated fadeInUp p-0">
                                                     <AiOutlineCalendar/> {item.createDate}
-                                                    <a   className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
+                                                    <a onClick={UpdateItem.bind(this,item._id)}  className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
                                                     <a onClick={DeleteItem.bind(this,item._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete /></a>
                                                     <a className="badge float-end bg-success">{item.status}</a>
                                                 </p>

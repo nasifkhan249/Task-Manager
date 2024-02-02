@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const profileSlice=createSlice({
     name:"profile",
@@ -7,7 +7,7 @@ export const profileSlice=createSlice({
     },
     reducers:{
         setProfile:(state,action)=>{
-            return{
+            return {
                 ...state,
                 value:action.payload
             }

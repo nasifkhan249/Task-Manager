@@ -1,9 +1,27 @@
-import React, {Fragment, useState} from 'react';
+import {Fragment} from 'react';
 import ReactCodeInput from "react-code-input";
+
+
 
 
 const VerifyOTP = () => {
 
+
+    let  defaultInputStyle= {
+            fontFamily: "monospace",
+            MozAppearance: "textfield",
+            margin: "4px",
+            paddingLeft: "8px",
+            width: "45px",
+            borderRadius: '3px',
+            height: "45px",
+            fontSize: "32px",
+            border: '1px solid lightskyblue',
+            boxSizing: "border-box",
+            color: "black",
+            backgroundColor: "white",
+            borderColor: "lightgrey"
+        }
 
     return (
         <Fragment>
@@ -14,7 +32,7 @@ const VerifyOTP = () => {
                             <div className="card-body">
                                 <h4>OTP VERIFICATION </h4>
                                 <p>A 6 Digit verification code has been sent to your email address. </p>
-                                <ReactCodeInput fields={6} />
+                                <ReactCodeInput  inputStyle={defaultInputStyle}  fields={6}/>
                                 <br/>  <br/>
                                 <button className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
                             </div>

@@ -229,23 +229,23 @@ export async function LogoutRequest(){
    }
 }
 
-
 export async function ProfileDetailsRequest(){
-        store.dispatch(ShowLoader());
-        try {
-            let URL=BaseURL+"/api/v1/details";
-            let result=await axios.get(URL,userAuth);
-            store.dispatch(HideLoader());
-            if(result.status===200){
-                store.dispatch(setProfile(result.data['data'][0]));
-            }else{
-                ErrorToast("Something went wrong1") 
-            }
-        } catch (e) {
-            ErrorToast("Something went wrong2");
-        }finally{
-            store.dispatch(HideLoader());
+    store.dispatch(ShowLoader());
+    try {
+        let URL=BaseURL+"/api/v1/details";
+        let result=await axios.get(URL,userAuth);
+        store.dispatch(HideLoader());
+        if(result.status===200){
+            store.dispatch(setProfile(result.data['data'][0]));
+        }else{
+            ErrorToast("Something went wrong1")
         }
+    } catch (e) {
+        console.log(e);
+        ErrorToast("Something went wrong2");
+    }finally{
+        store.dispatch(HideLoader());
+    }
 }
 
 
@@ -253,34 +253,40 @@ export async function ProfileUpdateRequest(email,firstName,lastName,mobile,passw
     store.dispatch(ShowLoader());
     try {
         let URL=BaseURL+"/api/v1/update";
-        let PostBody={email:email,firstName:firstName,lastName:lastName,mobile:mobile,password:password,photo:photo}
-        let UserDetails={email:email,firstName:firstName,lastName:lastName,mobile:mobile,photo:photo}
+        let postBody={
+            email:email,
+            firstName:firstName,
+            lastName:lastName,
+            mobile:mobile,
+            password:password,
+            photo:photo
+        };
+        let userDetails={
+            email:email,
+            firstName:firstName,
+            lastName:lastName,
+            mobile:mobile,
+            photo:photo
+        }
 
-        let result=await axios.post(URL,PostBody,userAuth);
+        store.dispatch(HideLoader());
+        let result=await axios.post(URL,postBody,userAuth);
         if(result.status===200){
-            SuccessToast("Profile Update");
-            setUserDetails(UserDetails);
+            SuccessToast("Profile update successful");
+            setUserDetails(userDetails);
             return true;
         }else{
             ErrorToast("Something went wrong1");
-            return false;
+            return false
         }
-    } catch (e) {
+    }  catch (e) {
+        console.log(e);
         ErrorToast("Something went wrong2");
-        return false;
+        return false
     }finally{
         store.dispatch(HideLoader());
     }
-
 }
-
-
-
-
-
-
-
-
 
 
 

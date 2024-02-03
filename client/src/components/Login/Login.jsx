@@ -21,7 +21,8 @@ const Login = () => {
         }else{
           let result=await LoginRequest(email,password);
           if(result===true){
-            window.location.href="/"
+            window.location.href="/";
+            
 
           }
         }

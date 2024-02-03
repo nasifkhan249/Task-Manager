@@ -20,17 +20,17 @@ class SessionHelper{
 
 
     setEmail(Email){
-        localStorage.setItem("Email",Email)
+        sessionStorage.setItem("Email",Email)
     }
     getEmail(){
-        return localStorage.getItem("Email")
+        return sessionStorage.getItem("Email")
     }
 
     setOTP(OTP){
-        localStorage.setItem("OTP",OTP)
+        sessionStorage.setItem("OTP",OTP)
     }
     getOTP(){
-        return localStorage.getItem("OTP")
+        return sessionStorage.getItem("OTP")
     }
 
 

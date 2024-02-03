@@ -1,7 +1,25 @@
-import React, {Fragment, useRef} from 'react';
+import {Fragment, useRef} from 'react';
+import { ErrorToast, IsEmail } from '../../helpers/FormHelper';
+import { VerifyEmailRequest } from '../../APIRequest/APIRequest';
+import { useNavigate } from 'react-router-dom';
 
 
 const SendOTP = () => {
+    let emailRef=useRef();
+    let navigate=useNavigate();
+
+    const VerifyEmail=()=>{
+        let email=emailRef.value;
+        if(IsEmail(email)){
+            ErrorToast("Enter a valid email request!");
+        }else{
+            VerifyEmailRequest(email).then((result)=>{
+                if(result===true){
+                    navigate("/VerifyOTP")
+                }
+            })
+        }
+    }
 
     return (
         <Fragment>
@@ -13,9 +31,9 @@ const SendOTP = () => {
                                 <h4>EMAIL ADDRESS</h4>
                                 <br/>
                                 <label>Your email address</label>
-                                <input   placeholder="User Email" className="form-control animated fadeInUp" type="email"/>
+                                <input ref={(input)=>emailRef=input}  placeholder="User Email" className="form-control animated fadeInUp" type="email"/>
                                 <br/>
-                                <button   className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
+                                <button onClick={VerifyEmail}  className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
                             </div>
                         </div>
                     </div>

@@ -35,6 +35,7 @@ const MasterLayout = (props) => {
     const handleLogout=async ()=>{
        await LogoutRequest();
        localStorage.clear();
+       sessionStorage.clear();
        window.location.href="/Login"
     }
 

@@ -1,5 +1,8 @@
-import {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import ReactCodeInput from "react-code-input";
+import { VerifyOTPRequest } from '../../APIRequest/APIRequest';
+import { getEmail } from '../../helpers/SessionHelper';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -21,6 +24,18 @@ const VerifyOTP = () => {
             color: "black",
             backgroundColor: "white",
             borderColor: "lightgrey"
+    }
+        const [otp,setOtp]=useState("");
+        let navigate=useNavigate();
+
+        const OTPverify=()=>{
+            if(otp.length===6){
+                VerifyOTPRequest(getEmail(),otp).then((result)=>{
+                    if(result===true){
+                        navigate("/CreatePassword")
+                    }
+                })
+            }
         }
 
     return (
@@ -32,9 +47,9 @@ const VerifyOTP = () => {
                             <div className="card-body">
                                 <h4>OTP VERIFICATION </h4>
                                 <p>A 6 Digit verification code has been sent to your email address. </p>
-                                <ReactCodeInput  inputStyle={defaultInputStyle}  fields={6}/>
+                                <ReactCodeInput  onChange={(value)=>setOtp(value)}  inputStyle={defaultInputStyle}  fields={6}/>
                                 <br/>  <br/>
-                                <button className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
+                                <button onClick={OTPverify}className="btn w-100 animated fadeInUp float-end btn-primary">Next</button>
                             </div>
                         </div>
                     </div>

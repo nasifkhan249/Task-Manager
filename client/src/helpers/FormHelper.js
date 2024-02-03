@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let EmailRegx = /\S+@\S+\.\S+/;
 let MobileRegx = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
